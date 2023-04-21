@@ -1,15 +1,16 @@
 package com.nubeero.eclat.model.eclatUser;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
+
 @Data
-@Embeddable
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class EmploymentHistory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String role;
     private String industry;
     private String company;

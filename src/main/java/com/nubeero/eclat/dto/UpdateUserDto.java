@@ -4,14 +4,17 @@ import com.nubeero.eclat.model.eclatUser.EmploymentHistory;
 import com.nubeero.eclat.model.eclatUser.WorkExperience;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class UpdateUserDto {
     private Long userId;
     private String country;
-    private WorkExperience workExperience;
+    private List<WorkExperience> workExperience;
     private String linkedin;
     private String personalWebsite;
     private String jobDescription;
-    private EmploymentHistory employmentHistory;
+    private List <EmploymentHistory> employmentHistory;
 
 }

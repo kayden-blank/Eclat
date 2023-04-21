@@ -1,13 +1,9 @@
 package com.nubeero.eclat.repository;
 
-import com.nubeero.eclat.model.eclatUser.User;
+import com.nubeero.eclat.model.eclatUser.EmploymentHistory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
-
-
-
-    boolean existsByEmail(String email);
+public interface EmploymentHistoryRepo extends CrudRepository<EmploymentHistory,Long> {
 }

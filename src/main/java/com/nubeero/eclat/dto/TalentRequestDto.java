@@ -3,7 +3,7 @@ package com.nubeero.eclat.dto;
 import lombok.Data;
 
 @Data
-public class CreateJobDto {
+public class TalentRequestDto {
     private String recruiter;
     private String company;
     private String jobRole;

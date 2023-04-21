@@ -1,19 +1,25 @@
 package com.nubeero.eclat.service;
 
 import com.nubeero.eclat.dto.CreateEclatUserDto;
+import com.nubeero.eclat.dto.LoginDto;
 import com.nubeero.eclat.dto.UpdateUserDto;
+import com.nubeero.eclat.exception.EclatException;
 import com.nubeero.eclat.model.eclatUser.User;
+import com.nubeero.eclat.response.ResponseBodyObject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface UserService {
-void createUser(CreateEclatUserDto dto);
+ResponseBodyObject createUser(CreateEclatUserDto dto) throws EclatException;
 
-void updateUser(UpdateUserDto dto);
-List<User> findAll();
+ResponseBodyObject updateUser(UpdateUserDto dto) throws EclatException;
+List<User> findAll() throws EclatException;
 
-Optional<User> findById(Long id);
+User findById (Long id) throws EclatException;
+
+boolean findByEmail(String userEmail) throws EclatException;
+
+User login(LoginDto loginDto) throws EclatException;
 }

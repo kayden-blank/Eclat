@@ -1,15 +1,16 @@
 package com.nubeero.eclat.model.eclatUser;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
     private String firstname;
     private String lastName;
@@ -20,10 +21,13 @@ public class User {
     private Integer yearOfExperience;
     private String password;
     private String country;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private WorkExperience workExperience;
     private String linkedin;
     private String personalWebsite;
     private String jobDescription;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private EmploymentHistory employmentHistory;
 
 }
+
