@@ -1,10 +1,8 @@
 package com.nubeero.eclat.model.eclatUser;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
