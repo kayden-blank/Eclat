@@ -5,7 +5,7 @@ import com.nubeero.eclat.dto.LoginDto;
 import com.nubeero.eclat.dto.UpdateUserDto;
 import com.nubeero.eclat.exception.EclatException;
 import com.nubeero.eclat.model.eclatUser.EmploymentHistory;
-import com.nubeero.eclat.model.eclatUser.User;
+import com.nubeero.eclat.model.eclatUser.EclatUser;
 import com.nubeero.eclat.model.eclatUser.WorkExperience;
 import com.nubeero.eclat.repository.UserRepository;
 import com.nubeero.eclat.response.ResponseBodyObject;
@@ -93,14 +93,14 @@ public class UserTest {
     }
     @Test
     void testThatFindAllEclatUsers() throws EclatException{
-        List<User> eclatUsers= userService.findAll();
+        List<EclatUser> eclatUsers= userService.findAll();
         eclatUsers.size();
         assertThat(eclatUsers).isNotNull();
         System.out.println(eclatUsers);
     }
     @Test
     void testThatFindEclatUserById() throws EclatException{
-        User user= userService.findById(1L);
+        EclatUser user= userService.findById(1L);
         user.getId();
         assertThat(user).isNotNull();
         System.out.println(user);
