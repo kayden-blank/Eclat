@@ -5,18 +5,15 @@ import com.nubeero.eclat.dto.LoginDto;
 import com.nubeero.eclat.dto.UpdateUserDto;
 import com.nubeero.eclat.exception.EclatException;
 import com.nubeero.eclat.model.eclatUser.EmploymentHistory;
-import com.nubeero.eclat.model.eclatUser.User;
+import com.nubeero.eclat.model.eclatUser.EclatUser;
 import com.nubeero.eclat.model.eclatUser.WorkExperience;
-import com.nubeero.eclat.repository.EmploymentHistoryRepo;
 import com.nubeero.eclat.repository.UserRepository;
-import com.nubeero.eclat.repository.WorkExperienceRepo;
 import com.nubeero.eclat.response.ResponseBodyObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,14 +22,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    private User getUserById(Long userId) throws EclatException {
+    private EclatUser getUserById(Long userId) throws EclatException {
         return userRepository.findById(userId).orElseThrow(() ->
                 new EclatException("UserId not Found"));
     }
 
     @Override
     public ResponseBodyObject createUser(CreateEclatUserDto dto) throws EclatException {
-        User user = new User();
+        EclatUser user = new EclatUser();
         user.setFirstname(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setPhoneNumber(dto.getPhoneNumber());
@@ -58,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseBodyObject updateUser(UpdateUserDto dto) throws EclatException {
-        User user = getUserById((dto.getUserId()));
+        EclatUser user = getUserById((dto.getUserId()));
         if (dto.getUserId() != null) {
 
             dto.getEmploymentHistory().stream().forEach(employmentHistory -> buildEmploymentHistory(user, employmentHistory));
@@ -76,16 +73,16 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private static void buildWorkExperience(User user, WorkExperience workExperience) {
+    private static void buildWorkExperience(EclatUser user, WorkExperience workExperience) {
         user.setWorkExperience(workExperience);
     }
 
-    private static void buildEmploymentHistory(User user, EmploymentHistory employmentHistory) {
+    private static void buildEmploymentHistory(EclatUser user, EmploymentHistory employmentHistory) {
         user.setEmploymentHistory(employmentHistory);
     }
 
 
-    private ResponseBodyObject userUpdateResponse(User savedUser) throws EclatException {
+    private ResponseBodyObject userUpdateResponse(EclatUser savedUser) throws EclatException {
         ResponseBodyObject responseBodyObject = new ResponseBodyObject();
         responseBodyObject.setTimeStamp(LocalDateTime.now());
         responseBodyObject.setMessage("Updated successfully");
@@ -97,12 +94,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() throws EclatException {
-        return (List<User>) userRepository.findAll();
+    public List<EclatUser> findAll() throws EclatException {
+        return (List<EclatUser>) userRepository.findAll();
     }
 
     @Override
-    public User findById(Long id) throws EclatException {
+    public EclatUser findById(Long id) throws EclatException {
         return userRepository.findById(id).orElseThrow(() ->
                 new EclatException("This user does not exist"));
     }
@@ -113,8 +110,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(LoginDto loginDto) throws EclatException {
-        User user = new User();
+    public EclatUser login(LoginDto loginDto) throws EclatException {
+        EclatUser user = new EclatUser();
         if (userRepository.existsByEmail(loginDto.getEmail())) {
             user.setEmail(loginDto.getEmail());
             user.setPassword(loginDto.getPassword());

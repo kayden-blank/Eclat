@@ -4,7 +4,7 @@ import com.nubeero.eclat.dto.CreateEclatUserDto;
 import com.nubeero.eclat.dto.LoginDto;
 import com.nubeero.eclat.dto.UpdateUserDto;
 import com.nubeero.eclat.exception.EclatException;
-import com.nubeero.eclat.model.eclatUser.User;
+import com.nubeero.eclat.model.eclatUser.EclatUser;
 import com.nubeero.eclat.response.ResponseBodyObject;
 import com.nubeero.eclat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,17 +48,17 @@ public class EclatUserController {
     }
     @GetMapping("/all")
     public ResponseEntity<?> findAllEclatUser() throws EclatException{
-        List<User> eclatUsers= userService.findAll();
+        List<EclatUser> eclatUsers= userService.findAll();
         return new ResponseEntity<>(eclatUsers, HttpStatus.OK);
     }
 
 
     @GetMapping("{userId}")
-    public ResponseEntity<User> findById(@PathVariable @RequestParam Long userId) throws EclatException {
+    public ResponseEntity<EclatUser> findById(@PathVariable @RequestParam Long userId) throws EclatException {
         if (userId == null) {
             throw new EclatException("user Id cannot be null");
         } else {
-            User user= userService.findById(userId);
+            EclatUser user= userService.findById(userId);
             return new ResponseEntity<>( user,HttpStatus.OK);
         }
 

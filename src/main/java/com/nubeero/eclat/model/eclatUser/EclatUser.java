@@ -1,14 +1,15 @@
 package com.nubeero.eclat.model.eclatUser;
 
-//import com.google.gson.annotations.SerializedName;
+
+
+
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-public class User {
+public class EclatUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
